@@ -1,0 +1,40 @@
+{
+  "name": "pm2-php-fpm",
+  "version": "0.0.0",
+  "description": "Monitor PHP-FPM with Keymetrics",
+  "author": "Leonard Kinday <leonard@kinday.ru>",
+  "scripts": {
+    "dev": "npm run transpile -- --watch --source-maps inline",
+    "prepublish": "npm run transpile",
+    "prepush": "npm test",
+    "test": "eslint src",
+    "transpile": "babel src --out-dir lib"
+  },
+  "dependencies": {
+    "fastcgi-parser": "^0.1.5",
+    "moment": "^2.10.6",
+    "pm2": "latest",
+    "pmx": "latest",
+    "ramda": "^0.17.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.3",
+    "eslint": "^1.6.0",
+    "eslint-config-airbnb": "^0.1.0",
+    "husky": "^0.10.1"
+  },
+  "config": {
+    "fcgi_path": "/var/run/php5-fpm.sock",
+    "fcgi_host": "",
+    "fcgi_port": "",
+    "interval": 1000
+  },
+  "apps": [
+    {
+      "script": "index.js",
+      "name": "pm2-php-fpm"
+    }
+  ],
+  "license": "MIT"
+}
