@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npm run transpile -- --watch --source-maps inline",
     "prepublish": "npm run transpile",
+    "postpublish": "git push --follow-tags",
     "prepush": "npm test",
     "test": "eslint src",
     "transpile": "babel src --out-dir lib"
