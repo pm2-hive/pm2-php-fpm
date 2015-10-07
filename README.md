@@ -21,7 +21,7 @@ This module monitors following PHP-FPM metrics:
 
 ## Requirements
 
-This module reqires PHP-FPM and [PM2][pm2] to be installed. Also it may require you to edit PHP-FPM configs to enable status page.
+This module reqires PHP-FPM and [PM2][pm2] to be installed. Also it may require you to edit PHP-FPM configs to enable status page. Make sure your user has privileges to access PHP-FPM socket.
 
 
 ## Installation
@@ -64,6 +64,15 @@ Check module configuration. Make sure that path or host and port are the ones yo
 ### `PHP-FPM status endpoint not found` error
 
 You’ve entered wrong endpoint. Or changed its name in PHP-FPM configuration recently and didn’t update module settings.
+
+
+### `Access to PHP-FPM denied` error
+
+User running PM2 daemon has no rights to access PHP-FPM socket. You need to add your user to group owning socket. Find out its name in PHP-FPM pool config or use `stat -c %G /path/to/php5-fpm.sock`
+
+Add your user (e.g. `myuser`) to target group (e.g. `www-data`): `sudo usermod -a -G www-data myuser`
+
+Reconnect to your server and restart PM2 daemon: `pm2 update`
 
 
 ### Other
