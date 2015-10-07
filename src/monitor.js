@@ -93,6 +93,9 @@ export default class Stats {
       if (err.code === 'ECONNREFUSED') {
         return cb(new Error('Cannot connect to PHP-FPM'));
       }
+      if (err.code === 'EACCES') {
+        return cb(new Error('Access to PHP-FPM denied'));
+      }
       cb(err);
     });
 
