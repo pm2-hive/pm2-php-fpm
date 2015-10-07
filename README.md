@@ -68,7 +68,7 @@ You’ve entered wrong endpoint. Or changed its name in PHP-FPM configuration re
 
 ### Other
 
-Check out [Issues][issues]. You may find someone with the same problem. If your problem is unique, feel free to create a [new issue][new-issue].
+Look through [Issues][issues]. You may find someone with the same problem. If your problem is unique, feel free to create a [new issue][new-issue].
 
 
 ## Uninstallation
