@@ -132,7 +132,7 @@ export default class Reporter {
       skipZero: true,
       data: (() => {
         const load = data.processes.reduce((sum, process) =>
-        	sum + parseFloat(process.lastRequestMemory) / 1024, 0);
+          sum + parseFloat(process.lastRequestMemory) / 1024, 0);
         const processes = data.processes.reduce((sum, process) =>
           sum + Number(Boolean(parseFloat(process.lastRequestMemory))), 0);
         return load / (processes || 1);
@@ -169,4 +169,3 @@ export default class Reporter {
     this.metrics[name][types[type]](value(data));
   }
 }
-
