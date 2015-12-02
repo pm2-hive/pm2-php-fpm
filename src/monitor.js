@@ -3,6 +3,7 @@ import fastcgi, { writer as Writer, parser as Parser } from 'fastcgi-parser';
 import { merge } from 'ramda';
 
 const FCGI_BEGIN = fastcgi.constants.record.FCGI_BEGIN;
+const FCGI_END = fastcgi.constants.record.FCGI_END;
 const FCGI_STDOUT = fastcgi.constants.record.FCGI_STDOUT;
 const FCGI_PARAMS = fastcgi.constants.record.FCGI_PARAMS;
 
@@ -69,6 +70,7 @@ export default class Stats {
     this.fpm = new Socket();
     this.fpm.writer = new Writer();
     this.fpm.parser = new Parser();
+    this.buffer = [];
 
     this.fpm.on('connect', () => {
       const header = this.headerGenerator({ params });
@@ -101,7 +103,11 @@ export default class Stats {
 
     this.fpm.parser.onRecord = record => {
       if (record.header.type === FCGI_STDOUT) {
-        const body = this.getBody(record.body);
+        this.buffer.push(record.body);
+      }
+
+      if (record.header.type === FCGI_END) {
+        const body = this.getBody(this.buffer.join(''));
 
         try {
           const output = JSON.parse(body);
@@ -118,6 +124,8 @@ export default class Stats {
           // https://github.com/pm2-hive/pm2-php-fpm/issues/new
           cb(body);
         }
+
+        this.buffer = [];
       }
     };
 
