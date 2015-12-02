@@ -2,7 +2,7 @@
 
 PHP-FPM module for [Keymetrics][keymetrics]
 
-![pm2-php-fpm screenshot](screenshot.png?raw=true)
+![pm2-php-fpm screenshot](https://raw.githubusercontent.com/pm2-hive/pm2-php-fpm/master/screenshot.png)
 
 ## Description
 
