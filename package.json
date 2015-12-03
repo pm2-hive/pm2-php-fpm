@@ -1,6 +1,6 @@
 {
   "name": "pm2-php-fpm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Monitor PHP-FPM with Keymetrics",
   "author": "Leonard Kinday <leonard@kinday.ru>",
   "scripts": {
