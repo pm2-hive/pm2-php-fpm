@@ -9,12 +9,20 @@ const FCGI_PARAMS = fastcgi.constants.record.FCGI_PARAMS;
 
 export default class Stats {
   constructor(options = {}) {
-    this.options = {
-      fcgi: {
-        path: options.fcgi_path || '/var/run/php5-fpm.sock',
+
+    if (options.fcgi_host) {
+      const fcgi = {
         host: options.fcgi_host,
-        port: options.fcgi_port,
-      },
+        port: options.fcgi_port
+      }
+    } else {
+      const fcgi = {
+        path: options.fcgi_path
+      }
+    }
+
+    this.options = {
+      fcgi: fcgi,
       endpoint: options.endpoint || '/status',
       interval: options.interval || 1000,
     };
